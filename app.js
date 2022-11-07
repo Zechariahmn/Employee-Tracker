@@ -27,7 +27,6 @@ function firstPrompt() {
             "View Employees by Department",
             "Add Employee",
             "Remove Employees",
-            "Update Employee Role",
             "Add Role",
             "End"
         ]
@@ -44,8 +43,6 @@ function firstPrompt() {
             break;
             case "Remove Employee": RemoveEmployee();
             break;
-            case "Update Employee Role": UpdateEmployeeRole();
-            break;
             case "Add Role": AddRole();
             break;
             case "End": connection.end();
@@ -54,17 +51,17 @@ function firstPrompt() {
     });
 
   function viewDepartments() {
-    db.query('select * from department', function (err, results){
+    db.query('SELECT * from department', function (err, results){
         console.log(results);
     })
 
     function viewRoles(){
-        db.query('select * from role', function (err, results){
+        db.query('SELECT * from role', function (err, results){
             console.log(results);
         })
         
         function viewEmployee(){
-            db.query('select * from employee', function (err, results){
+            db.query('SELECT * from employee', function (err, results){
                 console.log(results);
             })
 
@@ -74,10 +71,37 @@ function firstPrompt() {
                     type: "input",
                     message: "What is the new role?"
                 })
+                .then(function(response){
+                    db.query('INSERT INTO departments (name) VALUES(?)', function(err, results){
+                        console.log(results);
+                    })
+                })
 
+                function AddRole(title, salary, department_id){
+                    inquirer.prompt({
+                        name: "title",
+                        type: "input",
+                        message: "What is the new role being added?"
+                    },
+                    {
+                        name: "salary",
+                        type: "input",
+                        message: "What is the salary of the new added role?"
+                    },
+                    {
+                        name: "departmentid",
+                        type: "input",
+                        message: "What is the department of the new added role?"
+                    })
+                    .then(function(response){
+                        db.query('INSERT INTO departments (name) VALUES(?)', function(err, results){
+                            console.log(results);
+                        })
+                    })
+                }
                 
             }
         }
     }
   }
-
+}
