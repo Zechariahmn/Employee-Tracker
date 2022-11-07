@@ -57,5 +57,19 @@ function firstPrompt() {
     db.query('select * from department', function (err, results){
         console.log(results);
     })
+
+    function viewRoles(){
+        db.query('select * from role', function (err, results){
+            console.log(results);
+        })
+        
+        function viewEmployee(){
+            db.query('select * from employee', function (err, results){
+                console.log(results);
+            })
+
+            
+        }
+    }
   }
 
