@@ -4,8 +4,8 @@ require ("console.table")
 
 let connection = mysql.createConnection({
     host: "localhost",
-    port: 3306;
-    user; "root",
+    port: 3306,
+    user: "root",
     password: "Grandzaria123",
     database: "employeeDB"
 });
@@ -52,4 +52,10 @@ function firstPrompt() {
             break;
         }
     });
-}
+
+  function viewDepartments() {
+    db.query('select * from department', function (err, results){
+        console.log(results);
+    })
+  }
+
