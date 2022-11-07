@@ -68,7 +68,15 @@ function firstPrompt() {
                 console.log(results);
             })
 
-            
+            function addDepartment(){
+                inquirer.prompt ({
+                    name: "title",
+                    type: "input",
+                    message: "What is the new role?"
+                })
+
+                
+            }
         }
     }
   }
