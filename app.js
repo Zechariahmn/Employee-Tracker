@@ -98,6 +98,29 @@ function firstPrompt() {
                             console.log(results);
                         })
                     })
+
+                    function AddEmployee(first_name, last_name, role_id, manager_id){
+                        inquirer.prompt({
+                        name: "first name",
+                        type: "input",
+                        message: "What is the first name of the new employee?"
+                        },
+                        {
+                        name: "last name",
+                        type: "input",
+                        message: "What is the last name of the newly added employee?"
+                        },
+                        {
+                        name: "roleid",
+                        type: "input",
+                        message: "What is the role of the newly added employee?"
+                        },
+                        {
+                        name: "managerid",
+                        type: "input",
+                        message: "Who is the manager of the newly added employee?"
+                        })
+                    }
                 }
                 
             }
