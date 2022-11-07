@@ -33,4 +33,23 @@ function firstPrompt() {
         ]
 
     })
+
+    .then(function ({task}) {
+        switch (task) {
+            case "View Employees": viewEmployee();
+            break;
+            case "View Employees by Department": ViewEmployeeByDepartment();
+            break;
+            case "Add Employee": AddEmployee();
+            break;
+            case "Remove Employee": RemoveEmployee();
+            break;
+            case "Update Employee Role": UpdateEmployeeRole();
+            break;
+            case "Add Role": AddRole();
+            break;
+            case "End": connection.end();
+            break;
+        }
+    });
 }
