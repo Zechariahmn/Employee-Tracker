@@ -8,4 +8,9 @@ let connection = mysql.createConnection({
     user; "root",
     password: "Grandzaria123",
     database: "employeeDB"
-})
+});
+
+connection.connect(function(err){
+    if (err) throw err;
+    firstPrompt();
+});
