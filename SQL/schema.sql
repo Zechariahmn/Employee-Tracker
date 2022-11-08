@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS employeeDB;
+DROP DATABASE IF EXISTS employeedb;
 
-CREATE DATABASE EmployeeDB
-USE EmployeeDB;
+CREATE DATABASE Employeedb
+USE Employeedb;
 
 CREATE TABLE department(
     id INT NOT NULL AUTO_INCREMENT,
