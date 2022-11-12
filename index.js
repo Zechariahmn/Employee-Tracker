@@ -1,7 +1,5 @@
-const mysql = require ("mysql");
+const mysql = require ("mysql2");
 const inquirer = require ("inquirer");
-const express = require("express");
-const { response } = require("express");
 require ("console.table")
 
 let connection = mysql.createConnection({
@@ -24,11 +22,13 @@ const firstPrompt = () => {
         message: "which would you like to view?",
 
         choices: [
-            "View Employee",
-            "View Department",
-            "Add Employee",
+            "View all Employees",
+            "View all Departments",
+            "view all roles",
+            "add a department",
+            "Add an Employee",
             "Remove Employees",
-            "Add Role",
+            "Add a Role",
             "End"
         ]
 
@@ -71,21 +71,25 @@ const firstPrompt = () => {
         }
     });
 
+    //function that allows the user to view departments
   function viewDepartments() {
     db.query('SELECT id, name from department', function (err, results){
         console.log(results);
     })
 
+    //function that allows the user to view roles 
     function viewRoles(){
         db.query('SELECT title, salary, department_id from role JOIN department ON role_id = department_id', function (err, results){
             console.log(results);
         })
         
-        function viewEmployee(){
+        // function that allows the user to view the employees
+        function viewEmployees(){
             db.query('SELECT employee.id, employee.first_name, employee.last_name, role.salary, role.title, employee.manager_id, department.name, employee.role_id FROM employee JOIN role ON role_id = role.id JOIN department ON department_id = department_id', function (err, results){
                 console.log(results);
             })
 
+            //function that allows the user to add a department
             function addDepartment(){
                 inquirer.prompt ({
                     name: "title",
@@ -93,7 +97,7 @@ const firstPrompt = () => {
                     message: "What is the new role?"
                 })
                 .then(function (answer){
-                    connection.query("INSERT INTO department (name) VALUES (?)", response.addDepartment, (error, results)=>{
+                    connection.query("INSERT INTO department (name) VALUES (?)", response.addDepartment, (err, results)=>{
                     
                         console.log("\n")
                 
@@ -104,6 +108,7 @@ const firstPrompt = () => {
                   })
                 }
 
+                //function that allows the user to add a role
                 function addRole(){
                     inquirer.prompt({
                         name: "title",
@@ -120,14 +125,15 @@ const firstPrompt = () => {
                         type: "input",
                         message: "What is the department of the new added role?"
                     })
-                    .then(function(answer, results){
-                        connection.query("INSERT INTO role SET ?", {title: answer.addTitle, department_id: answer.addDid, salary: answer.addSalary},
+                    .then(function(err, results){
+                        connection.query("INSERT INTO role SET (?)", {title: answer.addTitle, department_id: answer.addDid, salary: answer.addSalary},
                         console.table(results)
                         )
                         firstPrompt()
                       })
                     }
 
+                    // function that allows the user to add an employee
                     function addEmployee(){
                         inquirer.prompt({
                         name: "first name",
@@ -149,7 +155,7 @@ const firstPrompt = () => {
                         type: "input",
                         message: "Who is the manager of the newly added employee?"
                         })
-                        .then(function (answer, results){
+                        .then(function (err, results){
                             connection.query("INSERT INTO employee SET ?",{first_name: answer.addFname, last_name: answer.addLname, role_id: answer.addroleid, manager_id: answer.addmanagerid},
                             console.table(results)
                             )

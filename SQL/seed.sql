@@ -34,3 +34,5 @@ INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ('Nathan', 'Adams', 2, NULL);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ('Kyle', 'Bolt', 3, 2);
+
+
