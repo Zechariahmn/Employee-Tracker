@@ -58,10 +58,11 @@ function employeeOptions() {
             ]
         }
 
-    ]).then(result => {
+    ])
+    .then(result => {
         console.log(result)
 
-        
+        // Allows users to view all employees
         if (result.choice === 'viewEmployees') {
             db.promise().query('SELECT * FROM employee;').then(result => {
                 console.table(result[0])
@@ -69,19 +70,24 @@ function employeeOptions() {
             employeeOptions();
         }
 
-        
+        //Allows users to view all roles
         if (result.choice === 'viewRoles') {
             db.promise().query('SELECT * FROM role;').then(result => {
                 console.table(result[0])
             })
             employeeOptions();
         }
+
+        //Allows users to view all departments
         if (result.choice === 'viewDepartments') {
             db.promise().query('SELECT * FROM department;').then(result => {
                 console.table(result[0])
             })
             employeeOptions();
-        }//the following code adds a new department to the db if "adddepartment" is chosen
+
+        }
+        
+        //the following code adds a new department to the db if "adddepartment" is chosen
         const addDepartment = {
             type: 'input',
             name: 'newDepartment',
@@ -96,7 +102,9 @@ function employeeOptions() {
                 employeeOptions();
             })
 
-        }//if add role is chosen then the following code will add a new role to the db
+        }
+        
+        //if add role is chosen then the following code will add a new role to the db
         if (result.choice === 'addRole') {
             db.promise().query('SELECT * FROM department;').then(([results]) => {
                 const deptNamesArr = [];
@@ -137,7 +145,9 @@ function employeeOptions() {
                 })
             })
 
-        }// if add employee is chosen the following code will add a new employee to the db
+        }
+        
+        // if add employee is chosen the following code will add a new employee to the db
         if (result.choice === 'addEmployee') {
             inquirer.prompt({
                 type: 'confirm',
@@ -197,7 +207,9 @@ function employeeOptions() {
                             })
                         })
                     })
-                } else {
+                } 
+                
+                else {
                     
                     db.promise().query('SELECT * FROM role;').then(([response]) => {
                         const roleNamesArr = [];
@@ -235,7 +247,9 @@ function employeeOptions() {
                         })
                     })
                 } 
-            })// updates an employees role if "updateEmployeeRole" is chosen
+            })
+            
+            // updates an employees role if "updateEmployeeRole" is chosen
         } if (result.choice === 'updateEmployeeRole') {
             
              
