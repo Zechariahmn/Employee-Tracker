@@ -21,7 +21,7 @@ const db = mysql.createConnection(
 
 //starts up the inquirer prompt
 function employeeOptions() {
-    // asks all the questions of what the client wants to do
+    // asks all the questions of what the users want to do
     inquirer.prompt([
         {
             type: 'list',
@@ -59,6 +59,7 @@ function employeeOptions() {
         }
 
     ])
+    
     .then(result => {
         console.log(result)
 
@@ -128,7 +129,9 @@ function employeeOptions() {
                         message: 'which department is this new role in?',
                         choices: deptNamesArr
                     }
-                ]).then((answer) => {
+                ])
+                
+                .then((answer) => {
                     let createdRole = answer.newRole;
                     let departmentId;
                     results.forEach((department) => {
@@ -153,7 +156,9 @@ function employeeOptions() {
                 type: 'confirm',
                 name: 'manager',
                 message: 'Does this Employee have a manager?'
-            }).then((result) => {
+            })
+            
+            .then((result) => {
                 if (result.manager === true) {
                     db.promise().query('SELECT * FROM employee;').then(([response]) => {
                         const managerNamesArr = [];
@@ -163,7 +168,9 @@ function employeeOptions() {
                             name: 'manager',
                             message: 'who is the employees manager',
                             choices: managerNamesArr
-                        }).then((answer) => {
+                        })
+                        
+                        .then((answer) => {
                             let employeeId;
                             response.forEach((employee) => {
                                 if (answer.manager === employee.first_name) { employeeId = employee.id }
@@ -190,7 +197,9 @@ function employeeOptions() {
                                         message: 'What is the employees role',
                                         choices: roleNamesArr
                                     }
-                                ]).then((result) => {
+                                ])
+                                
+                                .then((result) => {
                                     let roleId;
                                     response.forEach((role) => {
                                         if (result.newEmployeeRole === role.title) { roleId = role.id; }
@@ -231,7 +240,9 @@ function employeeOptions() {
                                 message: 'What is the employees role',
                                 choices: roleNamesArr
                             }
-                        ]).then((result) => {
+                        ])
+                        
+                        .then((result) => {
                             let roleId;
                             response.forEach((role) => {
                                 if (result.newEmployeeRole === role.title) { roleId = role.id; }
@@ -275,7 +286,9 @@ function employeeOptions() {
                             message: 'What new role will this employee have?',
                             choices: allRolesArr
                         }
-                    ]).then ((answer) => {
+                    ])
+                    
+                    .then ((answer) => {
                         let chosenEmployeeId, newRoleId;
                         
                         response.forEach((employee) => {
@@ -304,6 +317,3 @@ function employeeOptions() {
 }
 
 employeeOptions()
-    
-  
-
