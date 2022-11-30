@@ -17,6 +17,8 @@ To install necessary dependencies, run the following command:
 [npm i]
 
 ## Usage
+https://drive.google.com/file/d/1nzGSPnZi9N_7a9vGVFbAD5mOnsQtXTi6/view?usp=share_link
+
 The user must first pull down the repo in oreder to have the necessary dependencies in order for the application to work. The user can then use the command line using the [node index.js] command to start the application. For more detailed explanation the user can watch the walkthrough video from screensatify.
 
 ## License
